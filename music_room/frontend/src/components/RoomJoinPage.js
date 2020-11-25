@@ -10,6 +10,27 @@ import { Link } from "react-router-dom";
 export default class RoomJoinPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      toJoin: "......"
+    };
+    this.handleCodeChange = this.handleCodeChange.bind(this);
+    this.handleJoinClick = this.handleJoinClick.bind(this);
+  }
+
+  handleCodeChange(e) {
+    this.setState({
+      toJoin: e.target.value
+    });
+  }
+
+  handleJoinClick() {
+    fetch("/api/get-room" + "?code=" + this.state.toJoin).then((response) => {
+      if (response.ok) {
+        this.props.history.push("/room/" + this.state.toJoin);
+      } else {
+        alert("Invalid Code! Try another one.");
+      }
+    });
   }
 
   render() {
@@ -25,7 +46,7 @@ export default class RoomJoinPage extends Component {
             <FormHelperText>
               <div align="center">Enter Room Code</div>
             </FormHelperText>
-            <TextField required={true} inputProps={{ style: { textAlign: "center" } }} />
+            <TextField required={true} inputProps={{ style: { textAlign: "center" } }} onChange={this.handleCodeChange} />
           </FormControl>
         </Grid>
         <Grid item xs={2} align="center">
@@ -34,7 +55,7 @@ export default class RoomJoinPage extends Component {
           </Button>
         </Grid>
         <Grid item xs={2} align="center">
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={this.handleJoinClick}>
             Join
           </Button>
         </Grid>
