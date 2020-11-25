@@ -54,10 +54,10 @@ export default class CreateRoomPage extends Component {
 
   render() {
     return (
-      <Grid container spacing={1}>
+      <Grid container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
           <Typography component="h4" variant="h4">
-            Create A Room
+            Create Room
           </Typography>
         </Grid>
         <Grid item xs={12} align="center">
@@ -85,14 +85,14 @@ export default class CreateRoomPage extends Component {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} align="center">
-          <Button color="primary" variant="contained" onClick={this.handleRoomButtonPressed}>
-            Create Room
-          </Button>
-        </Grid>
-        <Grid item xs={12} align="center">
+        <Grid item xs={1.5} align="center">
           <Button color="secondary" variant="contained" to="/" component={Link}>
             Back
+          </Button>
+        </Grid>
+        <Grid item xs={1.5} align="center">
+          <Button color="primary" variant="contained" onClick={this.handleRoomButtonPressed}>
+            Create
           </Button>
         </Grid>
       </Grid>
