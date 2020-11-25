@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Room from "./Room";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class HomePage extends Component {
           </Route>
           <Route path="/join" component={RoomJoinPage}></Route>
           <Route path="/create" component={CreateRoomPage}></Route>
+          <Route path="/room/:roomCode" component={Room}></Route>
         </Switch>
       </Router>
     );
