@@ -13,6 +13,7 @@ cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
 Django==3.1
+django-sslserver==0.22
 djangorestframework==3.12.2
 entrypoints==0.3
 idna==2.10
