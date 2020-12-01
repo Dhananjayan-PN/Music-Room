@@ -11,7 +11,8 @@ export default class RoomJoinPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toJoin: "......"
+      toJoin: "",
+      error: ""
     };
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.handleJoinClick = this.handleJoinClick.bind(this);
@@ -24,13 +25,24 @@ export default class RoomJoinPage extends Component {
   }
 
   handleJoinClick() {
-    fetch("/api/get-room" + "?code=" + this.state.toJoin).then((response) => {
-      if (response.ok) {
-        this.props.history.push("/room/" + this.state.toJoin);
-      } else {
-        alert("Invalid Code! Try another one.");
-      }
-    });
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: this.state.toJoin
+      })
+    };
+    fetch("/api/join-room", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          this.props.history.push("/room/" + this.state.toJoin);
+        } else {
+          this.setState({
+            error: "Invalid Room Code! (" + this.state.toJoin + ")"
+          });
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   render() {
@@ -46,7 +58,14 @@ export default class RoomJoinPage extends Component {
             <FormHelperText>
               <div align="center">Enter Room Code</div>
             </FormHelperText>
-            <TextField required={true} inputProps={{ style: { textAlign: "center" } }} onChange={this.handleCodeChange} />
+            <TextField
+              required={true}
+              inputProps={{ style: { textAlign: "center" } }}
+              onChange={this.handleCodeChange}
+              value={this.state.toJoin}
+              helperText={this.state.error}
+              error={this.state.error}
+            />
           </FormControl>
         </Grid>
         <Grid item xs={2} align="center">
