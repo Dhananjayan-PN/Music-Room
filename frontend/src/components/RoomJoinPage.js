@@ -35,6 +35,9 @@ export default class RoomJoinPage extends Component {
     fetch("/api/join-room", requestOptions)
       .then((response) => {
         if (response.ok) {
+          this.setState({
+            toJoin: ""
+          });
           this.props.history.push("/room/" + this.state.toJoin);
         } else {
           this.setState({
