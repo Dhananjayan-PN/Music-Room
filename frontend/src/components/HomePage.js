@@ -28,12 +28,12 @@ export default class HomePage extends Component {
                   Listen to music along with your friends in real time.
                 </Typography>
               </Grid>
-              <Grid item xs={2} align="center">
+              <Grid item xs={3} align="center" style={{ marginTop: "25px" }}>
                 <Button color="primary" variant="contained" to="/create" component={Link}>
                   Create Room
                 </Button>
               </Grid>
-              <Grid item xs={2} align="center">
+              <Grid item xs={3} align="center" style={{ marginTop: "25px" }}>
                 <Button color="primary" variant="contained" to="/join" component={Link}>
                   Join Room
                 </Button>
