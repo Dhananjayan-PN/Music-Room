@@ -41,7 +41,7 @@ export default class RoomJoinPage extends Component {
           this.props.history.push("/room/" + this.state.toJoin);
         } else {
           this.setState({
-            error: "Invalid Room Code! (" + this.state.toJoin + ")"
+            error: "Invalid Room Code!"
           });
         }
       })
