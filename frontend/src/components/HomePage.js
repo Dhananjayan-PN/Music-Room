@@ -8,11 +8,20 @@ import Room from "./Room";
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      roomCode: null
+    };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    fetch("/api/user-in-room")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ roomCode: data.code });
+      });
+  }
 
-  rederHome = () => {
+  renderHome() {
     return (
       <Grid container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
@@ -33,15 +42,19 @@ export default class HomePage extends Component {
         </Grid>
       </Grid>
     );
-  };
+  }
 
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/">
-            {this.rederHome}
-          </Route>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return this.state.roomCode ? <Redirect to={`/room/${this.state.roomCode}`} /> : this.renderHome();
+            }}
+          />
           <Route path="/join" component={RoomJoinPage}></Route>
           <Route path="/create" component={CreateRoomPage}></Route>
           <Route path="/room/:roomCode" component={Room}></Route>
