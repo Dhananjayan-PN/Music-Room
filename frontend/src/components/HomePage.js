@@ -21,6 +21,12 @@ export default class HomePage extends Component {
       });
   }
 
+  clearRoomCode = () => {
+    this.setState({
+      roomCode: null
+    });
+  };
+
   renderHome() {
     return (
       <Grid container spacing={1} align="center" justify="center">
@@ -57,7 +63,12 @@ export default class HomePage extends Component {
           />
           <Route path="/join" component={RoomJoinPage}></Route>
           <Route path="/create" component={CreateRoomPage}></Route>
-          <Route path="/room/:roomCode" component={Room}></Route>
+          <Route
+            path="/room/:roomCode"
+            render={(props) => {
+              return <Room {...props} leaveRoomCallback={this.clearRoomCode} />;
+            }}
+          ></Route>
         </Switch>
       </Router>
     );
