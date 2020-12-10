@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
+import CreateRoomPage from "./CreateRoomPage";
 
 export default class Room extends Component {
   constructor(props) {
@@ -7,7 +8,8 @@ export default class Room extends Component {
     this.state = {
       votesToSkip: 2,
       guestCanPause: false,
-      isHost: false
+      isHost: false,
+      isSettings: false
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
@@ -41,12 +43,33 @@ export default class Room extends Component {
     });
   };
 
+  settingsClickHandle = () => {
+    this.setState({
+      isSettings: true
+    });
+  };
+
+  exitSetttingCallback = () => {
+    this.setState({
+      isSettings: false
+    });
+    this.getRoomDetails();
+  };
+
   render() {
-    return (
+    return this.state.isSettings ? (
+      <CreateRoomPage
+        roomCode={this.roomCode}
+        guestCanPause={this.state.guestCanPause}
+        votesToSkip={this.state.votesToSkip}
+        settings={true}
+        callback={this.exitSetttingCallback}
+      />
+    ) : (
       <Grid container spacing={1}>
         <Grid item xs={12} align="center">
           <Typography variant="h2" component="h2">
-            Room Code: {this.roomCode}
+            Code: {this.roomCode}
           </Typography>
         </Grid>
         <Grid item xs={12} align="center">
@@ -64,6 +87,13 @@ export default class Room extends Component {
             Host: {this.state.isHost ? "✓" : "✗"}
           </Typography>
         </Grid>
+        {this.state.isHost ? (
+          <Grid item xs={12} align="center">
+            <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
+              Settings
+            </Button>
+          </Grid>
+        ) : null}
         <Grid item xs={12} align="center">
           <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
             Leave Room

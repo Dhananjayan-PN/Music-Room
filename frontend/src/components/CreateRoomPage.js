@@ -16,8 +16,8 @@ export default class CreateRoomPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      guestCanPause: true,
-      votesToSkip: this.defaultVotes
+      guestCanPause: this.props.guestCanPause != null ? this.props.guestCanPause : true,
+      votesToSkip: this.props.votesToSkip != null ? this.props.votesToSkip : defaultVotes
     };
     this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
     this.handleVotesChange = this.handleVotesChange.bind(this);
@@ -37,19 +37,44 @@ export default class CreateRoomPage extends Component {
   }
 
   handleRoomButtonPressed() {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        votes_to_skip: this.state.votesToSkip,
-        guest_can_pause: this.state.guestCanPause
-      })
-    };
-    fetch("/api/create-room", requestOptions)
-      .then((response) => response.json())
-      .then((data) => this.props.history.push("/room/" + data.code));
+    if (this.props.settings) {
+      const requestOptions = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          votes_to_skip: this.state.votesToSkip,
+          guest_can_pause: this.state.guestCanPause,
+          code: this.props.roomCode
+        })
+      };
+      fetch("/api/update-room", requestOptions)
+        .then((response) => {
+          if (response.ok) {
+            response.json();
+            this.props.callback();
+          } else {
+            console.log(response.json());
+            alert("Something went wrong!");
+          }
+        })
+        .then((data) => {});
+    } else {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          votes_to_skip: this.state.votesToSkip,
+          guest_can_pause: this.state.guestCanPause
+        })
+      };
+      fetch("/api/create-room", requestOptions)
+        .then((response) => response.json())
+        .then((data) => this.props.history.push("/room/" + data.code));
+    }
   }
 
   render() {
@@ -57,7 +82,7 @@ export default class CreateRoomPage extends Component {
       <Grid container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
           <Typography component="h4" variant="h4">
-            Create Room
+            {this.props.settings ? "Settings" : "Create Room"}
           </Typography>
         </Grid>
         <Grid item xs={12} align="center">
@@ -65,7 +90,7 @@ export default class CreateRoomPage extends Component {
             <FormHelperText>
               <div align="center">Guest Control of Playback State</div>
             </FormHelperText>
-            <RadioGroup row defaultValue="true" onChange={this.handleGuestCanPauseChange}>
+            <RadioGroup row defaultValue={this.state.guestCanPause.toString()} onChange={this.handleGuestCanPauseChange}>
               <FormControlLabel value="true" control={<Radio color="primary" />} label="Play/Pause" labelPlacement="bottom" />
               <FormControlLabel value="false" control={<Radio color="secondary" />} label="No Control" labelPlacement="bottom" />
             </RadioGroup>
@@ -79,20 +104,26 @@ export default class CreateRoomPage extends Component {
             <TextField
               required={true}
               type="number"
-              defaultValue={this.defaultVotes}
+              defaultValue={this.state.votesToSkip}
               inputProps={{ min: 1, style: { textAlign: "center" } }}
               onChange={this.handleVotesChange}
             />
           </FormControl>
         </Grid>
         <Grid item xs={1.5} align="center">
-          <Button color="secondary" variant="contained" to="/" component={Link}>
-            Back
-          </Button>
+          {this.props.settings ? (
+            <Button color="secondary" variant="contained" onClick={this.props.callback}>
+              Close
+            </Button>
+          ) : (
+            <Button color="secondary" variant="contained" to="/" component={Link}>
+              Back
+            </Button>
+          )}
         </Grid>
         <Grid item xs={1.5} align="center">
           <Button color="primary" variant="contained" onClick={this.handleRoomButtonPressed}>
-            Create
+            {this.props.settings ? "Save" : "Create"}
           </Button>
         </Grid>
       </Grid>
