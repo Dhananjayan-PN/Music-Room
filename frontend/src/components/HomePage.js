@@ -36,12 +36,12 @@ export default class HomePage extends Component {
         <Grid item xs={12} align="center">
           <Typography variant="overline">Listen to music with others in real time.</Typography>
         </Grid>
-        <Grid item xs={3} align="center" style={{ marginTop: "25px" }}>
+        <Grid item xs={1.5} align="center" style={{ marginTop: "25px", marginRight: "5px" }}>
           <Button color="primary" variant="contained" to="/create" component={Link}>
             Create Room
           </Button>
         </Grid>
-        <Grid item xs={3} align="center" style={{ marginTop: "25px" }}>
+        <Grid item xs={1.5} align="center" style={{ marginTop: "25px", marginLeft: "5px" }}>
           <Button color="primary" variant="contained" to="/join" component={Link}>
             Join Room
           </Button>
