@@ -71,12 +71,12 @@ export default class RoomJoinPage extends Component {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={2} align="center">
+        <Grid item xs={1.5} align="center">
           <Button color="secondary" variant="contained" to="/" component={Link}>
             Back
           </Button>
         </Grid>
-        <Grid item xs={2} align="center">
+        <Grid item xs={1.5} align="center">
           <Button color="primary" variant="contained" onClick={this.handleJoinClick}>
             Join
           </Button>
