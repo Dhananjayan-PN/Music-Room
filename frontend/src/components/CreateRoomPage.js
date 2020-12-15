@@ -53,7 +53,7 @@ export default class CreateRoomPage extends Component {
         .then((response) => {
           if (response.ok) {
             response.json();
-            this.props.callback();
+            this.props.callback(true);
           } else {
             console.log(response.json());
             alert("Something went wrong!");
@@ -112,7 +112,7 @@ export default class CreateRoomPage extends Component {
         </Grid>
         <Grid item xs={1.5} align="center">
           {this.props.settings ? (
-            <Button color="secondary" variant="contained" onClick={this.props.callback}>
+            <Button color="secondary" variant="contained" onClick={this.props.callback.bind(this, false)}>
               Close
             </Button>
           ) : (

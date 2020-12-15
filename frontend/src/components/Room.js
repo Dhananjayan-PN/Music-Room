@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Grid, Button, Typography } from "@material-ui/core";
+import { Grid, Button, Typography, Snackbar, Collapse } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import CreateRoomPage from "./CreateRoomPage";
 
 export default class Room extends Component {
@@ -9,7 +10,8 @@ export default class Room extends Component {
       votesToSkip: 2,
       guestCanPause: false,
       isHost: false,
-      isSettings: false
+      isSettings: false,
+      updated: false
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
@@ -49,11 +51,21 @@ export default class Room extends Component {
     });
   };
 
-  exitSetttingCallback = () => {
+  exitSetttingCallback = (updated) => {
     this.setState({
-      isSettings: false
+      isSettings: false,
+      updated: updated
     });
     this.getRoomDetails();
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({
+      updated: false
+    });
   };
 
   render() {
@@ -66,49 +78,49 @@ export default class Room extends Component {
         callback={this.exitSetttingCallback}
       />
     ) : (
-      <Grid container spacing={1}>
-        <Grid item xs={12} align="center">
-          <Typography variant="h2" component="h2">
-            Code: {this.roomCode}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Votes To Skip: {this.state.votesToSkip}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Guests Can Pause: {this.state.guestCanPause ? "✓" : "✗"}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align="center">
-          <Typography variant="h6" component="h6">
-            Host: {this.state.isHost ? "✓" : "✗"}
-          </Typography>
-        </Grid>
-        {this.state.isHost ? (
+      <div>
+        <Grid container spacing={1}>
+          <Grid item xs={12} align="center" style={{ marginBottom: "30px", marginLeft: "20px", marginRight: "20px" }}>
+            <Collapse in={this.state.updated}>
+              <Alert onClose={this.handleClose} severity="success" dismissable>
+                Room updated successfully!
+              </Alert>
+            </Collapse>
+          </Grid>
           <Grid item xs={12} align="center">
-            <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
-              Settings
+            <Typography variant="h2" component="h2">
+              Code: {this.roomCode}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <Typography variant="h6" component="h6">
+              Votes To Skip: {this.state.votesToSkip}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <Typography variant="h6" component="h6">
+              Guests Can Pause: {this.state.guestCanPause ? "✓" : "✗"}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <Typography variant="h6" component="h6">
+              Host: {this.state.isHost ? "✓" : "✗"}
+            </Typography>
+          </Grid>
+          {this.state.isHost ? (
+            <Grid item xs={12} align="center">
+              <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
+                Settings
+              </Button>
+            </Grid>
+          ) : null}
+          <Grid item xs={12} align="center">
+            <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
+              Leave Room
             </Button>
           </Grid>
-        ) : null}
-        <Grid item xs={12} align="center">
-          <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
-            Leave Room
-          </Button>
         </Grid>
-      </Grid>
+      </div>
     );
   }
-}
-
-{
-  /* <div>
-  <h3>{this.roomCode}</h3>
-  <p>Votes: {this.state.votesToSkip}</p>
-  <p>GuestCanPause: {this.state.guestCanPause.toString()}</p>
-  <p>Host: {this.state.isHost.toString()}</p>
-</div>; */
 }
