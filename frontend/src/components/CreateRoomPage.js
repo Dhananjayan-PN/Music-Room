@@ -17,7 +17,7 @@ export default class CreateRoomPage extends Component {
     super(props);
     this.state = {
       guestCanPause: this.props.guestCanPause != null ? this.props.guestCanPause : true,
-      votesToSkip: this.props.votesToSkip != null ? this.props.votesToSkip : defaultVotes
+      votesToSkip: this.props.votesToSkip != null ? this.props.votesToSkip : this.defaultVotes
     };
     this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
     this.handleVotesChange = this.handleVotesChange.bind(this);
