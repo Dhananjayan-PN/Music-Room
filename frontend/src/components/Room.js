@@ -112,21 +112,6 @@ export default class Room extends Component {
               Code: {this.roomCode}
             </Typography>
           </Grid>
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Votes To Skip: {this.state.votesToSkip}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Guests Can Pause: {this.state.guestCanPause ? "✓" : "✗"}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Host: {this.state.isHost ? "✓" : "✗"}
-            </Typography>
-          </Grid>
           {this.state.isHost ? (
             <Grid item xs={12} align="center">
               <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
