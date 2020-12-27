@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Button, Typography, Snackbar, Collapse } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import CreateRoomPage from "./CreateRoomPage";
+import MusicPLayer from "./MusicPlayer";
 
 export default class Room extends Component {
   constructor(props) {
@@ -12,10 +13,20 @@ export default class Room extends Component {
       isHost: false,
       isSettings: false,
       updated: false,
-      spotifyAuthenticated: false
+      spotifyAuthenticated: false,
+      copied: false,
+      song: {}
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.getCurrentSong, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   getRoomDetails() {
@@ -54,6 +65,21 @@ export default class Room extends Component {
       });
   };
 
+  getCurrentSong = () => {
+    fetch("/spotify/current-song")
+      .then((res) => {
+        if (!res.ok) {
+          return {};
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        this.setState({ song: data });
+        console.log(data);
+      });
+  };
+
   leaveButtonPressed = () => {
     const requestOptions = {
       method: "POST",
@@ -88,6 +114,12 @@ export default class Room extends Component {
     });
   };
 
+  copyToClipboard = () => {
+    navigator.clipboard.writeText(this.roomCode);
+    this.setState({ copied: true });
+    setTimeout(() => this.setState({ copied: false }), 5000);
+  };
+
   render() {
     return this.state.isSettings ? (
       <CreateRoomPage
@@ -99,7 +131,7 @@ export default class Room extends Component {
       />
     ) : (
       <div>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} justify="center">
           <Grid item xs={12} align="center" style={{ marginBottom: "30px", marginLeft: "20px", marginRight: "20px" }}>
             <Collapse in={this.state.updated}>
               <Alert onClose={this.handleClose} severity="success" dismissable>
@@ -108,18 +140,26 @@ export default class Room extends Component {
             </Collapse>
           </Grid>
           <Grid item xs={12} align="center">
-            <Typography variant="h2" component="h2">
-              Code: {this.roomCode}
-            </Typography>
+            <Button
+              style={{ marginBottom: 15 }}
+              color={this.state.copied ? "primary" : "secondary"}
+              variant="outlined"
+              onClick={this.copyToClipboard}
+            >
+              {this.state.copied ? "Copied" : "Copy Room Code"}
+            </Button>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <MusicPLayer song={this.state.song} />
           </Grid>
           {this.state.isHost ? (
-            <Grid item xs={12} align="center">
+            <Grid item xs={1.5} align="center">
               <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
                 Settings
               </Button>
             </Grid>
           ) : null}
-          <Grid item xs={12} align="center">
+          <Grid item xs={1.5} align="center">
             <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
               Leave Room
             </Button>

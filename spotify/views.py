@@ -77,7 +77,7 @@ class CurrentSong(APIView):
         is_playing = response.get('is_playing')
         song_id = item.get('id')
         artist_string = ""
-        for i, artist in enumerate(item.get('artist')):
+        for i, artist in enumerate(item.get('artists')):
             if i > 0:
                 artist_string += ", "
             name = artist.get('name')
