@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography, Snackbar, Collapse } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import CreateRoomPage from "./CreateRoomPage";
 import MusicPLayer from "./MusicPlayer";
 
@@ -132,13 +135,21 @@ export default class Room extends Component {
     ) : (
       <div>
         <Grid container spacing={1} justify="center">
-          <Grid item xs={12} align="center" style={{ marginBottom: "30px", marginLeft: "20px", marginRight: "20px" }}>
-            <Collapse in={this.state.updated}>
-              <Alert onClose={this.handleClose} severity="success" dismissable>
-                Room updated successfully!
-              </Alert>
-            </Collapse>
-          </Grid>
+          <Dialog
+            open={this.state.updated}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">Changes have been saved successfully!</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary" autoFocus>
+                OK
+              </Button>
+            </DialogActions>
+          </Dialog>
           <Grid item xs={12} align="center">
             <Button
               style={{ marginBottom: 15 }}
