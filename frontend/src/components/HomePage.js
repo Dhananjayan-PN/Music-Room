@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CreateRoomPage from "./CreateRoomPage";
 import RoomJoinPage from "./RoomJoinPage";
-import { Button, ButtonGroup, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import Room from "./Room";
 

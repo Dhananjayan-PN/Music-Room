@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Typography, Snackbar, Collapse } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -134,7 +134,7 @@ export default class Room extends Component {
       />
     ) : (
       <div>
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={1} justify="center" align="center">
           <Dialog
             open={this.state.updated}
             onClose={this.handleClose}
@@ -152,7 +152,7 @@ export default class Room extends Component {
           </Dialog>
           <Grid item xs={12} align="center">
             <Button
-              style={{ marginBottom: 15 }}
+              style={{ marginBottom: 15, marginTop: 50 }}
               color={this.state.copied ? "primary" : "secondary"}
               variant="outlined"
               onClick={this.copyToClipboard}
