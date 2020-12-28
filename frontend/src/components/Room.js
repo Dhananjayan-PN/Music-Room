@@ -118,7 +118,12 @@ export default class Room extends Component {
   };
 
   copyToClipboard = () => {
-    navigator.clipboard.writeText(this.roomCode);
+    const elem = document.createElement("textarea");
+    elem.value = this.roomCode;
+    document.body.appendChild(elem);
+    elem.select();
+    document.execCommand("copy");
+    document.body.removeChild(elem);
     this.setState({ copied: true });
     setTimeout(() => this.setState({ copied: false }), 5000);
   };
