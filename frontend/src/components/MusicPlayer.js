@@ -13,7 +13,13 @@ export default class Room extends Component {
   render() {
     return (
       <div className="MusicPLayer col">
-        <img style={{ minWidth: 300, width: "60%", boxShadow: "0px 2px 4px #9E9E9E", borderRadius: 5 }} src={this.props.song.image_url} />
+        <img
+          style={{ minWidth: 300, width: "60%", boxShadow: "0px 2px 4px #9E9E9E", borderRadius: 5 }}
+          src={
+            this.props.song.image_url ??
+            "https://images.squarespace-cdn.com/content/5d2e2c5ef24531000113c2a4/1564770295807-EJFN4EE3T23YXLMJMVJ5/image-asset.png?content-type=image%2Fpng"
+          }
+        />
         <Typography style={{ marginTop: 10 }} variant="h5">
           {this.props.song.title ?? "Title"}
         </Typography>
@@ -37,19 +43,23 @@ export default class Room extends Component {
         />
         <div style={{ marginBottom: 40 }} className="row">
           <Typography color="secondary" variant="overline">
-            {(Math.floor(this.props.song.time / 60000) + ":" + (this.props.song.time < 10000 ? "0" : "") + (this.props.song.time % 60000)).slice(
-              0,
-              4
-            )}
+            {(this.props.song.time === null) | (this.props.song.time === undefined)
+              ? "0:00"
+              : (Math.floor(this.props.song.time / 60000) + ":" + (this.props.song.time < 10000 ? "0" : "") + (this.props.song.time % 60000)).slice(
+                  0,
+                  4
+                )}
           </Typography>
           <img style={{ minWidth: 240, width: "61%" }}></img>
           <Typography color="secondary" variant="overline">
-            {(
-              Math.floor(this.props.song.duration / 60000) +
-              ":" +
-              (this.props.song.duration < 10000 ? "0" : "") +
-              (this.props.song.duration % 60000)
-            ).slice(0, 4)}
+            {(this.props.song.time === null) | (this.props.song.time === undefined)
+              ? "0:00"
+              : (
+                  Math.floor(this.props.song.duration / 60000) +
+                  ":" +
+                  (this.props.song.duration < 10000 ? "0" : "") +
+                  (this.props.song.duration % 60000)
+                ).slice(0, 4)}
           </Typography>
         </div>
       </div>
