@@ -8,7 +8,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div className="center">
+      <div className="App">
         <HomePage />
       </div>
     );

@@ -29,7 +29,7 @@ export default class HomePage extends Component {
 
   renderHome() {
     return (
-      <Grid container spacing={1} align="center" justify="center">
+      <Grid className="center" container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
           <Typography variant="h2">Music Room</Typography>
         </Grid>

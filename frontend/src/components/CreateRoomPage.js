@@ -79,7 +79,7 @@ export default class CreateRoomPage extends Component {
 
   render() {
     return (
-      <Grid container spacing={1} align="center" justify="center">
+      <Grid className="center" container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
           <Typography component="h4" variant="h4">
             {this.props.settings ? "Settings" : "Create Room"}

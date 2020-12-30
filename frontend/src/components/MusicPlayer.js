@@ -14,7 +14,7 @@ export default class Room extends Component {
     return (
       <div className="MusicPLayer col">
         <img
-          style={{ minWidth: 300, width: "60%", boxShadow: "0px 2px 4px #9E9E9E", borderRadius: 5 }}
+          style={{ minWidth: 300, width: "30%", boxShadow: "0px 2px 4px #9E9E9E", borderRadius: 5 }}
           src={
             this.props.song.image_url ??
             "https://images.squarespace-cdn.com/content/5d2e2c5ef24531000113c2a4/1564770295807-EJFN4EE3T23YXLMJMVJ5/image-asset.png?content-type=image%2Fpng"
@@ -36,7 +36,7 @@ export default class Room extends Component {
           </IconButton>
         </div>
         <LinearProgress
-          style={{ minWidth: 300, width: "70%", marginBottom: 0 }}
+          style={{ minWidth: 300, width: "35%", marginBottom: 0 }}
           color="secondary"
           variant="determinate"
           value={(this.props.song.time / this.props.song.duration) * 100}
@@ -50,7 +50,7 @@ export default class Room extends Component {
                   4
                 )}
           </Typography>
-          <img style={{ minWidth: 240, width: "61%" }}></img>
+          <img style={{ minWidth: 240, width: "31%" }}></img>
           <Typography color="secondary" variant="overline">
             {(this.props.song.time === null) | (this.props.song.time === undefined)
               ? "0:00"

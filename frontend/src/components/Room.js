@@ -157,7 +157,7 @@ export default class Room extends Component {
           </Dialog>
           <Grid item xs={12} align="center">
             <Button
-              style={{ marginBottom: 15, marginTop: 50 }}
+              style={{ marginBottom: 20, marginTop: 30 }}
               color={this.state.copied ? "primary" : "secondary"}
               variant="outlined"
               onClick={this.copyToClipboard}
@@ -169,13 +169,13 @@ export default class Room extends Component {
             <MusicPLayer song={this.state.song} />
           </Grid>
           {this.state.isHost ? (
-            <Grid item xs={1.5} align="center">
+            <Grid item xs={1.5} align="center" style={{ marginBottom: 30 }}>
               <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
                 Settings
               </Button>
             </Grid>
           ) : null}
-          <Grid item xs={1.5} align="center">
+          <Grid item xs={1.5} align="center" style={{ marginBottom: 30 }}>
             <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
               Leave Room
             </Button>
