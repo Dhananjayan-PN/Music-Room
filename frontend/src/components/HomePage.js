@@ -28,6 +28,7 @@ export default class HomePage extends Component {
   };
 
   renderHome() {
+    document.getElementById("body").style.backgroundColor = "#fff";
     return (
       <Grid className="center" container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">

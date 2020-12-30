@@ -78,41 +78,59 @@ export default class CreateRoomPage extends Component {
   }
 
   render() {
+    if (this.props.darktheme) {
+      document.getElementById("body").style.backgroundColor = "#000";
+    } else {
+      document.getElementById("body").style.backgroundColor = "#fff";
+    }
     return (
       <Grid className="center" container spacing={1} align="center" justify="center">
         <Grid item xs={12} align="center">
-          <Typography component="h4" variant="h4">
+          <Typography style={{ color: this.props.darktheme ? "white" : "black" }} component="h4" variant="h4">
             {this.props.settings ? "Settings" : "Create Room"}
           </Typography>
         </Grid>
         <Grid item xs={12} align="center">
           <FormControl component="fieldset">
-            <FormHelperText>
+            <FormHelperText style={{ color: this.props.darktheme ? "#FFFFFF87" : "#00000087" }}>
               <div align="center">Guest Control of Playback State</div>
             </FormHelperText>
             <RadioGroup row defaultValue={this.state.guestCanPause.toString()} onChange={this.handleGuestCanPauseChange}>
-              <FormControlLabel value="true" control={<Radio color="primary" />} label="Play/Pause" labelPlacement="bottom" />
-              <FormControlLabel value="false" control={<Radio color="secondary" />} label="No Control" labelPlacement="bottom" />
+              <FormControlLabel
+                value="true"
+                control={<Radio color="primary" />}
+                label={<Typography style={{ color: this.props.darktheme ? "white" : "black" }}>Play/Pause</Typography>}
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio color="secondary" />}
+                label={<Typography style={{ color: this.props.darktheme ? "white" : "black" }}>No Control</Typography>}
+                labelPlacement="bottom"
+              />
             </RadioGroup>
           </FormControl>
         </Grid>
         <Grid item xs={12} align="center">
           <FormControl>
-            <FormHelperText>
+            <FormHelperText style={{ color: this.props.darktheme ? "#FFFFFF87" : "#00000087" }}>
               <div align="center">Votes Required To Skip Song</div>
             </FormHelperText>
             <TextField
               required={true}
               type="number"
               defaultValue={this.state.votesToSkip}
-              inputProps={{ min: 1, style: { textAlign: "center" } }}
+              inputProps={{
+                min: 1,
+                style: { textAlign: "center", color: this.props.darktheme ? "white" : "black" }
+              }}
               onChange={this.handleVotesChange}
             />
           </FormControl>
         </Grid>
         <Grid item xs={1.5} align="center">
           {this.props.settings ? (
-            <Button color="secondary" variant="contained" onClick={this.props.callback.bind(this, false)}>
+            <Button color="secondary" variant={this.props.darktheme ? "outlined" : "contained"} onClick={this.props.callback.bind(this, false)}>
               Close
             </Button>
           ) : (
@@ -122,7 +140,7 @@ export default class CreateRoomPage extends Component {
           )}
         </Grid>
         <Grid item xs={1.5} align="center">
-          <Button color="primary" variant="contained" onClick={this.handleRoomButtonPressed}>
+          <Button color="primary" variant={this.props.darktheme ? "outlined" : "contained"} onClick={this.handleRoomButtonPressed}>
             {this.props.settings ? "Save" : "Create"}
           </Button>
         </Grid>

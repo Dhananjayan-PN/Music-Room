@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Switch } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
+import NightsStayIcon from "@material-ui/icons/NightsStay";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
@@ -18,7 +20,8 @@ export default class Room extends Component {
       updated: false,
       spotifyAuthenticated: false,
       copied: false,
-      song: {}
+      song: {},
+      dark: false
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
@@ -129,8 +132,14 @@ export default class Room extends Component {
   };
 
   render() {
+    if (this.state.dark) {
+      document.getElementById("body").style.backgroundColor = "#000";
+    } else {
+      document.getElementById("body").style.backgroundColor = "#fff";
+    }
     return this.state.isSettings ? (
       <CreateRoomPage
+        darktheme={this.state.dark}
         roomCode={this.roomCode}
         guestCanPause={this.state.guestCanPause}
         votesToSkip={this.state.votesToSkip}
@@ -155,9 +164,9 @@ export default class Room extends Component {
               </Button>
             </DialogActions>
           </Dialog>
-          <Grid item xs={12} align="center">
+          <Grid item xs={1.5} align="center">
             <Button
-              style={{ marginBottom: 20, marginTop: 30 }}
+              style={{ marginBottom: 20, marginTop: 25 }}
               color={this.state.copied ? "primary" : "secondary"}
               variant="outlined"
               onClick={this.copyToClipboard}
@@ -165,18 +174,33 @@ export default class Room extends Component {
               {this.state.copied ? "Copied" : "Copy Room Code"}
             </Button>
           </Grid>
+          <Grid item xs={1.5} align="center" style={{ marginLeft: 20 }}>
+            <WbSunnyIcon style={{ color: this.state.dark ? "white" : "black", marginBottom: 20, marginTop: 32 }} />
+          </Grid>
+          <Grid item xs={1.5} align="center" style={{ marginBottom: 20, marginTop: 25, marginLeft: 0 }}>
+            <Switch
+              checked={this.state.dark}
+              onChange={() => this.setState({ dark: !this.state.dark })}
+              color="primary"
+              name="checkedB"
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          </Grid>
+          <Grid item xs={1.5} align="center" style={{ marginLeft: 0 }}>
+            <NightsStayIcon style={{ color: this.state.dark ? "white" : "black", marginBottom: 20, marginTop: 31 }} />
+          </Grid>
           <Grid item xs={12} align="center">
-            <MusicPLayer song={this.state.song} />
+            <MusicPLayer darktheme={this.state.dark} song={this.state.song} />
           </Grid>
           {this.state.isHost ? (
             <Grid item xs={1.5} align="center" style={{ marginBottom: 30 }}>
-              <Button color="primary" variant="contained" onClick={this.settingsClickHandle}>
+              <Button color="primary" variant={this.state.dark ? "outlined" : "contained"} onClick={this.settingsClickHandle}>
                 Settings
               </Button>
             </Grid>
           ) : null}
           <Grid item xs={1.5} align="center" style={{ marginBottom: 30 }}>
-            <Button color="secondary" variant="contained" onClick={this.leaveButtonPressed}>
+            <Button color="secondary" variant={this.state.dark ? "outlined" : "contained"} onClick={this.leaveButtonPressed}>
               Leave Room
             </Button>
           </Grid>
