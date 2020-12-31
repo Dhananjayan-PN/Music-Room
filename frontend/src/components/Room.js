@@ -151,15 +151,22 @@ export default class Room extends Component {
         <Grid container spacing={1} justify="center" align="center">
           <Dialog
             open={this.state.updated}
+            PaperProps={{
+              style: {
+                backgroundColor: this.state.dark ? "#000" : "#fff"
+              }
+            }}
             onClose={this.handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">Changes have been saved successfully!</DialogContentText>
+              <DialogContentText id="alert-dialog-description">
+                <span style={{ color: this.state.dark ? "white" : "black" }}>Changes have been successfully saved!</span>
+              </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary" autoFocus>
+              <Button onClick={this.handleClose} color={this.state.dark ? "secondary" : "primary"} autoFocus>
                 OK
               </Button>
             </DialogActions>
