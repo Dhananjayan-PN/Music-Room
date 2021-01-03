@@ -86,6 +86,14 @@ export default class Room extends Component {
       });
   };
 
+  playOrPause = () => {
+    if (this.state.song.is_playing) {
+      fetch("/spotify/pause", { method: "PUT", headers: { "Content-Type": "application/json" } });
+    } else {
+      fetch("/spotify/play", { method: "PUT", headers: { "Content-Type": "application/json" } });
+    }
+  };
+
   leaveButtonPressed = () => {
     const requestOptions = {
       method: "POST",
@@ -197,7 +205,7 @@ export default class Room extends Component {
             <NightsStayIcon style={{ color: this.state.dark ? "white" : "black", marginBottom: 20, marginTop: 31 }} />
           </Grid>
           <Grid item xs={12} align="center">
-            <MusicPLayer darktheme={this.state.dark} song={this.state.song} />
+            <MusicPLayer darktheme={this.state.dark} song={this.state.song} playOrPauseCallback={this.playOrPause} />
           </Grid>
           {this.state.isHost ? (
             <Grid item xs={1.5} align="center" style={{ marginBottom: 30 }}>

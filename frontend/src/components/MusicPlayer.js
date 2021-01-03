@@ -43,7 +43,7 @@ export default class Room extends Component {
           <IconButton color="secondary" aria-label="add an alarm">
             <SkipPrevious />
           </IconButton>
-          <IconButton color="secondary" aria-label="add an alarm">
+          <IconButton color="secondary" aria-label="add an alarm" onClick={this.props.playOrPauseCallback}>
             {this.props.song.is_playing ? <Pause /> : <PlayArrow />}
           </IconButton>
           <IconButton color="secondary" aria-label="add an alarm">
