@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Switch } from "@material-ui/core";
+import { Grid, Button, Switch, Typography } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
@@ -222,6 +222,14 @@ export default class Room extends Component {
             <Button color="secondary" variant={this.state.dark ? "outlined" : "contained"} onClick={this.leaveButtonPressed}>
               Leave Room
             </Button>
+          </Grid>
+          <Grid item xs={12} align="center" style={{ marginBottom: 10 }}>
+            <Typography variant="overline" style={{ color: this.state.dark ? "#FFFFFF99" : "black" }}>
+              &copy; 2021 Built by{" "}
+              <a href="https://dhananjayan.tech" style={{ color: "#3f50b5", textDecoration: "none" }}>
+                Dhananjayan P N
+              </a>
+            </Typography>
           </Grid>
         </Grid>
       </div>

@@ -35,17 +35,25 @@ export default class HomePage extends Component {
           <Typography variant="h2">Music Room</Typography>
         </Grid>
         <Grid item xs={12} align="center">
-          <Typography variant="overline">Listen to music with others in real time.</Typography>
+          <Typography variant="overline">Control music with others in the same room</Typography>
         </Grid>
-        <Grid item xs={1.5} align="center" style={{ marginTop: "25px", marginRight: "5px" }}>
+        <Grid item xs={1.5} align="center" style={{ marginTop: "20px", marginRight: "5px" }}>
           <Button color="primary" variant="contained" to="/create" component={Link}>
             Create Room
           </Button>
         </Grid>
-        <Grid item xs={1.5} align="center" style={{ marginTop: "25px", marginLeft: "5px" }}>
+        <Grid item xs={1.5} align="center" style={{ marginTop: "20px", marginLeft: "5px" }}>
           <Button color="primary" variant="contained" to="/join" component={Link}>
             Join Room
           </Button>
+        </Grid>
+        <Grid item xs={12} align="center" style={{ marginTop: "80px" }}>
+          <Typography variant="overline">
+            &copy; 2021 Built by{" "}
+            <a href="https://dhananjayan.tech" style={{ color: "#3f50b5", textDecoration: "none" }}>
+              Dhananjayan P N
+            </a>
+          </Typography>
         </Grid>
       </Grid>
     );
@@ -53,7 +61,7 @@ export default class HomePage extends Component {
 
   render() {
     return (
-      <Router>
+      <Router key="body">
         <Switch>
           <Route
             exact
