@@ -27,7 +27,12 @@ export default class Room extends Component {
     return (
       <div className="MusicPLayer col">
         <img
-          style={{ minWidth: 300, width: "30%", boxShadow: this.props.darktheme ? "1px 4px 20px #ffffff12" : "0px 2px 4px #9E9E9E", borderRadius: 5 }}
+          style={{
+            minWidth: 300,
+            width: "30%",
+            boxShadow: this.props.darktheme ? "1px 4px 20px #ffffff12" : "0px 2px 4px #9E9E9E",
+            borderRadius: 8
+          }}
           src={
             this.props.song.image_url ??
             "https://images.squarespace-cdn.com/content/5d2e2c5ef24531000113c2a4/1564770295807-EJFN4EE3T23YXLMJMVJ5/image-asset.png?content-type=image%2Fpng"
@@ -39,16 +44,19 @@ export default class Room extends Component {
         <Typography variant="overline" style={{ color: this.props.darktheme ? "#FFFFFF87" : "#00000087" }}>
           {this.props.song.artist ?? "Artist"}
         </Typography>
-        <div className="row">
-          <IconButton color="secondary" aria-label="add an alarm">
+        <div className="row" style={{ marginLeft: 15 }}>
+          <IconButton color="secondary">
             <SkipPrevious />
           </IconButton>
-          <IconButton color="secondary" aria-label="add an alarm" onClick={this.props.playOrPauseCallback}>
+          <IconButton color="secondary" onClick={this.props.playOrPauseCallback}>
             {this.props.song.is_playing ? <Pause /> : <PlayArrow />}
           </IconButton>
-          <IconButton color="secondary" aria-label="add an alarm">
+          <IconButton color="secondary" onClick={this.props.skipCallback}>
             <SkipNext />
           </IconButton>
+          <Typography variant="overline" style={{ marginTop: 5, display: "inline-block", color: this.props.darktheme ? "white" : "black" }}>
+            {this.props.song.votes !== undefined ? this.props.song.votes + "/" + this.props.song.votes_required : null}
+          </Typography>
         </div>
         <LinearProgress
           style={{ minWidth: 300, width: "35%", marginBottom: 0 }}
