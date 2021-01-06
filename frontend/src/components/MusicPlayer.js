@@ -64,7 +64,7 @@ export default class Room extends Component {
           variant="determinate"
           value={(this.props.song.time / this.props.song.duration) * 100}
         />
-        <div style={{ marginBottom: 40 }} className="row">
+        <div style={{ marginBottom: 15 }} className="row">
           <Typography color="secondary" variant="overline">
             {(this.props.song.time === null) | (this.props.song.time === undefined) ? "0:00" : this.msToTime(this.props.song.time)}
           </Typography>
