@@ -1,2 +1,3 @@
 **/node_modules/
 spotify/credentials.py
+.DS_Store
