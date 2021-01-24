@@ -79,7 +79,7 @@ export default class HomePage extends Component {
                   }
                 },
                 number: {
-                  value: window.innerWidth < 700 ? 30 : 80
+                  value: window.innerWidth < 700 ? 25 : 80
                 },
                 size: {
                   value: 2
