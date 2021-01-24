@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CreateRoomPage from "./CreateRoomPage";
+import Particles from "react-particles-js";
 import RoomJoinPage from "./RoomJoinPage";
 import { Button, Grid, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
@@ -62,6 +63,43 @@ export default class HomePage extends Component {
   render() {
     return (
       <Router key="body">
+        <Particles
+          style={{ position: "absolute" }}
+          height="100%"
+          width="100%"
+          params={{
+            particles: {
+              color: {
+                value: "#f50057"
+              },
+              line_linked: {
+                color: {
+                  value: "#f50057"
+                }
+              },
+              number: {
+                value: window.innerWidth < 700 ? 30 : 80
+              },
+              size: {
+                value: 2
+              }
+            },
+            interactivity: {
+              detectsOn: "canvas",
+              events: {
+                onClick: {
+                  enable: true,
+                  mode: "repulse"
+                },
+                onHover: {
+                  enable: true,
+                  mode: "attract"
+                },
+                resize: true
+              }
+            }
+          }}
+        />
         <Switch>
           <Route
             exact
