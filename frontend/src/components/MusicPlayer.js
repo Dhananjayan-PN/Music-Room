@@ -28,6 +28,7 @@ export default class Room extends Component {
       <div className="MusicPLayer col">
         <img
           style={{
+            opacity: 1,
             minWidth: 300,
             width: "30%",
             boxShadow: this.props.darktheme ? "1px 4px 20px #ffffff12" : "0px 2px 4px #9E9E9E",

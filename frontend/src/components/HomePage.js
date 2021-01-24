@@ -63,43 +63,45 @@ export default class HomePage extends Component {
   render() {
     return (
       <Router key="body">
-        <Particles
-          style={{ position: "absolute" }}
-          height="100%"
-          width="100%"
-          params={{
-            particles: {
-              color: {
-                value: "#f50057"
-              },
-              line_linked: {
+        <div className="particles">
+          <Particles
+            style={{ position: "absolute" }}
+            height="100%"
+            width="100%"
+            params={{
+              particles: {
                 color: {
                   value: "#f50057"
+                },
+                line_linked: {
+                  color: {
+                    value: "#f50057"
+                  }
+                },
+                number: {
+                  value: window.innerWidth < 700 ? 30 : 80
+                },
+                size: {
+                  value: 2
                 }
               },
-              number: {
-                value: window.innerWidth < 700 ? 30 : 80
-              },
-              size: {
-                value: 2
+              interactivity: {
+                detectsOn: "window",
+                events: {
+                  onClick: {
+                    enable: true,
+                    mode: "repulse"
+                  },
+                  onHover: {
+                    enable: true,
+                    mode: "attract"
+                  },
+                  resize: true
+                }
               }
-            },
-            interactivity: {
-              detectsOn: "canvas",
-              events: {
-                onClick: {
-                  enable: true,
-                  mode: "repulse"
-                },
-                onHover: {
-                  enable: true,
-                  mode: "attract"
-                },
-                resize: true
-              }
-            }
-          }}
-        />
+            }}
+          />
+        </div>
         <Switch>
           <Route
             exact
