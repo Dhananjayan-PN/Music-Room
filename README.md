@@ -7,4 +7,4 @@ A platform for you to control music on Spotify with your friends in the same roo
 Room host must have spotify premium for guests to change playback state.
 
 ## Check it Out
-[music-room-site.herokuapp.com](https://music-room-site.herokuapp.com/)
+[musicroom-c0c674502094.herokuapp.com](https://musicroom-c0c674502094.herokuapp.com)
