@@ -224,7 +224,7 @@ export default class Room extends Component {
           </Grid>
           <Grid item xs={12} align="center" style={{ marginBottom: 10 }}>
             <Typography variant="overline" style={{ color: this.state.dark ? "#FFFFFF99" : "black" }}>
-              &copy; 2021 Built by{" "}
+              &copy; 2023 Built by{" "}
               <a href="https://dhananjayan.tech" style={{ color: "#3f50b5", textDecoration: "none" }}>
                 Dhananjayan P N
               </a>

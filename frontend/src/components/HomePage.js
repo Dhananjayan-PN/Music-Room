@@ -50,7 +50,7 @@ export default class HomePage extends Component {
         </Grid>
         <Grid item xs={12} align="center" style={{ marginTop: "80px" }}>
           <Typography variant="overline">
-            &copy; 2021 Built by{" "}
+            &copy; 2023 Built by{" "}
             <a href="https://dhananjayan.tech" style={{ color: "#3f50b5", textDecoration: "none" }}>
               Dhananjayan P N
             </a>
